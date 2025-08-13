@@ -1,0 +1,25 @@
+{
+	"name": "@hideout",
+	"version": "1.0.0",
+	"private": true,
+	"scripts": {
+		"server:dev": "pnpm --filter @hideout/server dev",
+		"mobile:start": "pnpm --filter @hideout/mobile start",
+		"mobile:android": "pnpm --filter @hideout/mobile android",
+		"mobile:ios": "pnpm --filter @hideout/mobile ios",
+		"mobile:web": "pnpm --filter @hideout/mobile web",
+		"mobile:prebuild": "pnpm --filter @hideout/mobile prebuild",
+		"mobile:clean": "pnpm --filter @hideout/mobile clean",
+		"lint": "biome lint --write",
+		"format": "biome format --write"
+	},
+	"packageManager": "pnpm@10.14.0",
+	"workspaces": [
+		"packages/*"
+	],
+	"devDependencies": {
+		"@biomejs/biome": "^2.1.4",
+		"typescript": "^5.8.2",
+		"concurrently": "^9.1.0"
+	}
+}

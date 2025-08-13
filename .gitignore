@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+
+# Build
+dist/
+
+# Environment variables
+.env
+
+# Cloudflare
+.wrangler/
+
+# Expo
+.expo/
+ios/
+android/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.ipa
+*.aab
+*.apk
+expo-env.d.ts
+
+# MacOS
+.DS_Store
