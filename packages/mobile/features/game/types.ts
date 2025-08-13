@@ -49,7 +49,11 @@ export interface GameState {
 	theme: ThemeMode;
 }
 export interface GameStore extends GameState {
-  createGame: (payload: { name: string; polygon: Polygon }) => Promise<string | undefined>;
+	createGame: (payload: { name: string; polygon: Polygon }) => Promise<string | undefined>;
 	resetStore: () => void;
 	setTheme: (theme: ThemeMode) => void;
 }
+
+export type PhasePayload = { phase: GamePhase; endsAt: number };
+export type QrUpdatePayload = { nonce: string; expSec: number };
+export type GhostPayload = { playerId: string; centerLat: number; centerLon: number; radiusM: number };
