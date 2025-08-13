@@ -5,3 +5,9 @@ onlyBuiltDependencies:
   - esbuild
   - sharp
   - workerd
+  - dtrace-provider
+
+publicHoistPattern:
+  - '*expo-modules-core'
+  - '*expo-modules-autolinking'
+  - '*babel-preset-expo'

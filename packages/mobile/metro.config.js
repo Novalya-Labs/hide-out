@@ -10,8 +10,8 @@ const { assetExts, sourceExts } = config.resolver;
 // Nettoyage et fusion propre
 config.resolver = {
 	...config.resolver,
-	assetExts: [...assetExts.filter((ext) => ext !== "svg"), "riv"],
-	sourceExts: [...sourceExts, "svg", "riv"],
+	assetExts: [...assetExts.filter((ext) => ext !== "svg")],
+	sourceExts: [...sourceExts, "svg"],
 	unstable_enablePackageExports: false,
 };
 
