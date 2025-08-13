@@ -14,7 +14,7 @@ const config: ExpoConfig = {
 		policy: "appVersion",
 	},
 	updates: {
-		url: "https://u.expo.dev/011477d7-f777-4ddd-8aa2-e036a8d2ae43",
+		url: "https://u.expo.dev/97da40e0-ee41-4d74-8a8d-e18897634a2a",
 	},
 	ios: {
 		bundleIdentifier: "io.hideout.app",
@@ -38,6 +38,12 @@ const config: ExpoConfig = {
 		"expo-secure-store",
 		"expo-web-browser",
 		[
+			"expo-location",
+			{
+				locationAlwaysAndWhenInUsePermission: "Allow $(PRODUCT_NAME) to use your location.",
+			},
+		],
+		[
 			"expo-camera",
 			{
 				cameraPermission: "Allow $(PRODUCT_NAME) to access your camera, to upload images for analysis",
@@ -45,6 +51,13 @@ const config: ExpoConfig = {
 				recordAudioAndroid: true,
 			},
 		],
+		[
+			"@rnmapbox/maps",
+			{
+				RNMapboxMapsDownloadToken: process.env.MAPBOX_API_KEY,
+			},
+		],
+		"expo-keep-awake",
 		[
 			"expo-splash-screen",
 			{
@@ -63,7 +76,7 @@ const config: ExpoConfig = {
 	],
 	extra: {
 		eas: {
-			projectId: "011477d7-f777-4ddd-8aa2-e036a8d2ae43",
+			projectId: "97da40e0-ee41-4d74-8a8d-e18897634a2a",
 		},
 	},
 	experiments: {

@@ -1,9 +1,2 @@
-import { z } from "zod";
-
-const createGameSchema = z.object({
-	gamerId: z.string(),
-});
-
-export type CreateGamePayload = z.infer<typeof createGameSchema>;
-
-export const createGame = async (payload: CreateGamePayload) => {};
+export type CreateGamePayload = { name: string; polygon: any };
+export const createGame = async (_payload: CreateGamePayload) => {};

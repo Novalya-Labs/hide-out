@@ -1,8 +1,8 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { secureStorage } from "@/services/secure-storage";
-import type { GameState, GameStore } from "./gameTypes";
-import { createGame } from "./usecases/create-game/createGame";
+import type { GameState, GameStore } from "./types";
+import { createRoom } from "./usecases/create-room/createRoom";
 
 const initialState: GameState = {
 	user: null,
@@ -16,8 +16,12 @@ export const useGameStore = create<GameStore>()(
 			...initialState,
 			createGame: async (payload) => {
 				set({ isLoading: true });
-				await createGame(payload);
-				set({ isLoading: false });
+				try {
+					const { code } = await createRoom(payload as { name: string; polygon: any });
+					return code;
+				} finally {
+					set({ isLoading: false });
+				}
 			},
 			setTheme: (theme) => set({ theme }),
 			resetStore: () => set(initialState),

@@ -1,3 +1,17 @@
-name = "hide-out-worker"
+name = "hide-out-server"
 main = "src/index.ts"
-compatibility_date = "2024-12-01"
+compatibility_date = "2025-08-01"
+compatibility_flags = ["web_socket_compression"]
+
+[durable_objects]
+bindings = [
+  { name = "ROOMS", class_name = "RoomDO" }
+]
+
+[[migrations]]
+tag = "v1"
+new_classes = ["RoomDO"]
+
+[vars]
+HIDEOUT_DEBUG = "false"
+ALLOWED_ORIGINS = "*"
