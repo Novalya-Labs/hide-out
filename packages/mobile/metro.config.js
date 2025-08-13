@@ -1,23 +1,16 @@
 const { getExpoConfig } = require("@expo/config");
 const { withNativeWind } = require("nativewind/metro");
+const path = require("node:path");
 
-const config = withNativeWind(getExpoConfig(__dirname), {
-	input: "./global.css",
-});
+const projectRoot = __dirname;
+const workspaceRoot = path.resolve(__dirname, "../../");
 
-const { assetExts, sourceExts } = config.resolver;
+/** @type {import('expo/metro-config').MetroConfig} */
+const config = withNativeWind(getExpoConfig(projectRoot), { input: "./global.css" });
 
-// Nettoyage et fusion propre
-config.resolver = {
-	...config.resolver,
-	assetExts: [...assetExts.filter((ext) => ext !== "svg")],
-	sourceExts: [...sourceExts, "svg"],
-	unstable_enablePackageExports: false,
-};
-
-config.transformer = {
-	...config.transformer,
-	babelTransformerPath: require.resolve("react-native-svg-transformer"),
-};
+// Monorepo support
+config.watchFolders = [workspaceRoot];
+config.resolver.nodeModulesPaths = [path.resolve(projectRoot, "node_modules"), path.resolve(workspaceRoot, "node_modules")];
+config.resolver.unstable_enablePackageExports = false;
 
 module.exports = config;

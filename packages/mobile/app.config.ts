@@ -35,7 +35,13 @@ const config: ExpoConfig = {
 	plugins: [
 		"expo-router",
 		"expo-localization",
-		"expo-secure-store",
+		[
+			"expo-secure-store",
+			{
+				configureAndroidBackup: true,
+				faceIDPermission: "Allow $(PRODUCT_NAME) to access your Face ID biometric data.",
+			},
+		],
 		"expo-web-browser",
 		[
 			"expo-location",
@@ -54,7 +60,7 @@ const config: ExpoConfig = {
 		[
 			"@rnmapbox/maps",
 			{
-				RNMapboxMapsDownloadToken: process.env.MAPBOX_API_KEY,
+				RNMapboxMapsDownloadToken: `${process.env.MAPBOX_API_KEY}`,
 			},
 		],
 		"expo-keep-awake",
