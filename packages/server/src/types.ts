@@ -27,6 +27,7 @@ export interface PublicPlayer {
 	name: string;
 	role: Role;
 	status: PlayerStatus;
+	ready?: boolean;
 }
 
 export interface RoomSnapshot {

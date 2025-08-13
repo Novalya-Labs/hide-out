@@ -2,6 +2,7 @@ import { useKeepAwake } from "expo-keep-awake";
 import React from "react";
 import { View } from "react-native";
 import SvgQRCode from "react-native-qrcode-svg";
+import type { QrUpdatePayload, RoomSnapshot } from "@/features/game/types";
 import { useGameWs } from "../features/game/services/GameWsProvider";
 import { buildQrPayload } from "../features/game/services/qr.service";
 
@@ -14,11 +15,11 @@ export default function PlayHider() {
 	const [me, setMe] = React.useState("");
 
 	React.useEffect(() => {
-		const u1 = ws.on("snapshot", (p: any) => {
+		const u1 = ws.on<RoomSnapshot>("snapshot", (p) => {
 			setRoomId(p.roomId);
-			setMe(p.you?.id);
+			setMe(p.you?.id ?? "");
 		});
-		const u2 = ws.on("qr:update", (p: any) => {
+		const u2 = ws.on<QrUpdatePayload>("qr:update", (p) => {
 			setNonce(p.nonce);
 			setTtl(p.expSec || 10);
 		});

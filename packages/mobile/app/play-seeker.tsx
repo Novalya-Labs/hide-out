@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 import MapView, { Circle } from "react-native-maps";
+import type { GhostPayload } from "@/features/game/types";
 import { useGameWs } from "../features/game/services/GameWsProvider";
 
 export default function PlaySeeker() {
@@ -8,7 +9,7 @@ export default function PlaySeeker() {
 	const [ghosts, setGhosts] = useState<{ id: string; lat: number; lon: number; r: number }[]>([]);
 
 	useEffect(() => {
-		const unsub = ws.on("ghost", (p: any) => {
+		const unsub = ws.on<GhostPayload>("ghost", (p) => {
 			setGhosts((g) => [{ id: p.playerId, lat: p.centerLat, lon: p.centerLon, r: p.radiusM }, ...g.filter((x) => x.id !== p.playerId)]);
 		});
 

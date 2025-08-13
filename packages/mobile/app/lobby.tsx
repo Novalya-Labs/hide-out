@@ -2,22 +2,23 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { Button, FlatList, Switch, Text, View } from "react-native";
 import { GameWsProvider, useGameWs } from "@/features/game/services/GameWsProvider";
+import type { PhasePayload, PublicPlayer, RoomSnapshot } from "@/features/game/types";
 import { playerReady } from "@/features/game/usecases/player-ready/playerReady";
 
 function LobbyInner() {
 	const router = useRouter();
 	const { ws } = useGameWs();
 	const [ready, setReady] = useState(false);
-	const [players, setPlayers] = useState<any[]>([]);
+	const [players, setPlayers] = useState<PublicPlayer[]>([]);
 	const [allReady, setAllReady] = useState(false);
 	const [accept, setAccept] = useState(false);
 
 	useEffect(() => {
-		const u1 = ws.on("snapshot", (p: any) => {
-			setPlayers(p.players || []);
+		const u1 = ws.on<RoomSnapshot>("snapshot", (p) => {
+			setPlayers(p.players ?? []);
 		});
 
-		const u2 = ws.on("phase", (p: any) => {
+		const u2 = ws.on<PhasePayload>("phase", (p) => {
 			if (p.phase === "COUNTDOWN_HIDE" || p.phase === "HIDE") router.replace("/play-hider");
 			if (p.phase === "SEEK") router.replace("/play-seeker");
 			if (p.phase === "END") router.replace("/end");
