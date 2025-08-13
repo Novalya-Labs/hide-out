@@ -4,6 +4,8 @@ on:
     branches: [ master ]
     paths:
       - 'packages/server/**'
+      - 'pnpm-lock.yaml'
+      - './.github/workflows/deploy-worker.yml'
 
 jobs:
   deploy:
