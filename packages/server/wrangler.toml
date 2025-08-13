@@ -1,17 +1,18 @@
 name = "hide-out-server"
 main = "src/index.ts"
-compatibility_date = "2025-08-01"
-compatibility_flags = ["web_socket_compression"]
+compatibility_date = "2025-06-01"
 
-[durable_objects]
-bindings = [
-  { name = "ROOMS", class_name = "RoomDO" }
-]
+[[durable_objects.bindings]]
+name = "ROOMS"
+class_name = "RoomDO"
+
+[vars]
+HIDEOUT_DEBUG = "false"
+ALLOWED_ORIGINS = "*"
 
 [[migrations]]
 tag = "v1"
 new_sqlite_classes = ["RoomDO"]
 
-[vars]
-HIDEOUT_DEBUG = "false"
-ALLOWED_ORIGINS = "*"
+[observability.logs]
+enabled = true
