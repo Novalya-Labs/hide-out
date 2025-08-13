@@ -1,15 +1,18 @@
 import { send } from "../../utils/ws";
 import type { RoomContext } from "../context";
 
+type Ghosts = { emit: () => void };
+type Nonces = { rotateAll: () => void };
+
 export class PhaseScheduler {
-	constructor(
-		private ctx: RoomContext,
-		private ghosts: any,
-		private nonces: any,
-	) {}
+  constructor(
+    private ctx: RoomContext,
+    private ghosts: Ghosts,
+    private nonces: Nonces,
+  ) {}
 
 	async startIfReady() {
-		this.ctx.room.phase = "COUNTDOWN_HIDE" as any;
+    this.ctx.room.phase = "COUNTDOWN_HIDE";
 		this.ctx.room.endsAt = Date.now() + 10_000;
 		await this.ctx.state.storage.setAlarm(new Date(this.ctx.room.endsAt));
 		this.broadcastPhase();
@@ -17,7 +20,7 @@ export class PhaseScheduler {
 
 	async onAlarm() {
 		const now = Date.now();
-		const phase = this.ctx.room.phase as any;
+    const phase = this.ctx.room.phase;
 		if (phase === "COUNTDOWN_HIDE") return this.enter("HIDE", this.ctx.room.settings.hideDurationSec);
 		if (phase === "HIDE") return this.enter("SEEK", this.ctx.room.settings.seekDurationSec, true);
 		if (phase === "SEEK") {
@@ -28,7 +31,7 @@ export class PhaseScheduler {
 		}
 	}
 
-	private async enter(phase: any, durationSec: number, shortTick = false) {
+  private async enter(phase: "HIDE" | "SEEK", durationSec: number, shortTick = false) {
 		this.ctx.room.phase = phase;
 		const now = Date.now();
 		this.ctx.room.endsAt = now + durationSec * 1000;
@@ -42,8 +45,8 @@ export class PhaseScheduler {
 	private broadcastPhase() {
 		for (const ws of this.ctx.sockets.values()) send(ws, "phase", { phase: this.ctx.room.phase, endsAt: this.ctx.room.endsAt });
 	}
-	private async end() {
-		this.ctx.room.phase = "END" as any;
+  private async end() {
+    this.ctx.room.phase = "END";
 		this.broadcastPhase();
 	}
 }

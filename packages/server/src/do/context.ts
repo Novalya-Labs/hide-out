@@ -5,7 +5,7 @@ export type LastPos = { lat: number; lon: number; ts: number; speed?: number; he
 
 export interface RoomContext {
 	state: DurableObjectState;
-	env: { HIDEOUT_DEBUG: string; ALLOWED_ORIGINS: string } & Record<string, any>;
+  env: { HIDEOUT_DEBUG: string; ALLOWED_ORIGINS: string } & Record<string, unknown>;
 	room: {
 		code: string;
 		phase: GamePhase;

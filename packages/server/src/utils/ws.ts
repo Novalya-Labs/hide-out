@@ -1,6 +1,6 @@
 import type { ServerMsg } from "../types";
 
-export function send(ws: WebSocket, type: string, payload?: any, id?: string) {
+export function send(ws: WebSocket, type: string, payload?: unknown, id?: string) {
 	const msg: ServerMsg = { type, payload };
 	if (id) msg.id = id;
 	ws.send(JSON.stringify(msg));

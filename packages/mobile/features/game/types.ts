@@ -49,7 +49,7 @@ export interface GameState {
 	theme: ThemeMode;
 }
 export interface GameStore extends GameState {
-	createGame: (payload: { name: string; polygon: GeoJSON.Polygon }) => Promise<string | void>;
+  createGame: (payload: { name: string; polygon: Polygon }) => Promise<string | undefined>;
 	resetStore: () => void;
 	setTheme: (theme: ThemeMode) => void;
 }
