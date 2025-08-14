@@ -7,6 +7,7 @@
 		"mobile:start": "pnpm --filter @hideout/mobile start",
 		"mobile:android": "pnpm --filter @hideout/mobile android",
 		"mobile:ios": "pnpm --filter @hideout/mobile ios",
+		"mobile:ios:device": "pnpm --filter @hideout/mobile ios --device",
 		"mobile:web": "pnpm --filter @hideout/mobile web",
 		"mobile:prebuild": "pnpm --filter @hideout/mobile prebuild",
 		"mobile:clean": "pnpm --filter @hideout/mobile clean",

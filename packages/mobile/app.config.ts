@@ -17,14 +17,14 @@ const config: ExpoConfig = {
 		url: "https://u.expo.dev/97da40e0-ee41-4d74-8a8d-e18897634a2a",
 	},
 	ios: {
-		bundleIdentifier: "io.hideout.app",
+		bundleIdentifier: "cool.hideout.app",
 		supportsTablet: true,
 		infoPlist: {
 			ITSAppUsesNonExemptEncryption: false,
 		},
 	},
 	android: {
-		package: "io.hideout.app",
+		package: "cool.hideout.app",
 		edgeToEdgeEnabled: true,
 		adaptiveIcon: {
 			foregroundImage: "./assets/images/adaptive-icon.png",
