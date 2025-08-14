@@ -19,7 +19,6 @@ const config: ExpoConfig = {
 	ios: {
 		bundleIdentifier: "io.hideout.app",
 		supportsTablet: true,
-		usesAppleSignIn: true,
 		infoPlist: {
 			ITSAppUsesNonExemptEncryption: false,
 		},
@@ -63,7 +62,6 @@ const config: ExpoConfig = {
 				RNMapboxMapsDownloadToken: `${process.env.MAPBOX_API_KEY}`,
 			},
 		],
-		"expo-keep-awake",
 		[
 			"expo-splash-screen",
 			{
